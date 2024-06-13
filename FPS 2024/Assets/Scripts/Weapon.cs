@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] Transform firePoint;
 
     MeshFilter meshFilter;
+
     MeshRenderer meshRenderer;
 
     int currentMagazine;
