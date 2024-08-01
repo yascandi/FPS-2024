@@ -99,6 +99,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LoadLevel(sceneName); // Carrega a cena especificada
     }
 
+    public GameObject InstantiateRPC(string prebafName, Vector3 position, Quaternion rotation)
+    {
+        return PhotonNetwork.Instantiate(prebafName, position, rotation);
+    }
+
     // Método para obter a lista de jogadores como string
     public string GetPlayerList()
     {
