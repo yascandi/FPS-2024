@@ -1,5 +1,5 @@
-using System.Collections;
 using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,21 +11,21 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        // Verifica se a instância é nula
         if (instance == null)
         {
-            instance = this; // Define a instância para este objeto
+            instance = this;
         }
         else if (instance != this)
         {
-            Destroy(gameObject); // Destroi o objeto se já houver uma instância existente
+            Destroy(gameObject);
         }
     }
+
     #endregion
 
     const string playerPrefabPath = "Prefabs/Player";
 
-    int playerInGame;
+    int playersInGame;
     List<PlayerController> playerList = new List<PlayerController>();
     PlayerController playerLocal;
 
@@ -34,19 +34,19 @@ public class GameManager : MonoBehaviourPunCallbacks
         photonView.RPC("AddPlayer", RpcTarget.AllBuffered);
     }
 
-    // Update is called once per frame
     private void CreatePlayer()
     {
         PlayerController player = PhotonNetwork.Instantiate(playerPrefabPath, new Vector3(30, 1, 30), Quaternion.identity).GetComponent<PlayerController>();
+        player.photonView.RPC("Initialize", RpcTarget.All);
     }
-    
+
     [PunRPC]
     private void AddPlayer()
     {
-        playerInGame++;
-        if (playerInGame == PhotonNetwork.PlayerList.Length) 
-        { 
-            CreatePlayer(); 
+        playersInGame++;
+        if (playersInGame == PhotonNetwork.PlayerList.Length)
+        {
+            CreatePlayer();
         }
     }
 }
