@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviourPun
         characterController = GetComponent<CharacterController>();
         camTransform = GetComponentInChildren<Camera>().transform;
         playerGravity = GetComponent<PlayerGravity>();
+        weapon = GetComponentInChildren<Weapon>();  
     }
 
     [PunRPC]
@@ -82,7 +83,7 @@ public class PlayerController : MonoBehaviourPun
 
         Movement();
         Rotation();
-        //Fire();
+        Fire();
         }
     }
 
